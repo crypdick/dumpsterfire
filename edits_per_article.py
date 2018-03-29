@@ -4,18 +4,26 @@ class MRInitialProcess(MRJob):
 
 	def mapper(self, _, line):
 	    
-	    # We only care about Revision lines
+		num_bad_formatted_lines = 0
+
+	    	# We only care about Revision lines
 		if line[0:8] == "REVISION":
 
 			revision_pieces = line.split()
-			article_id = revision_pieces[1]
-			#revision_id = revision_pieces[2]
-			#article_title = revision_pieces[3]
-			#timestamp = revision_pieces[4]
-			#editor = revision_pieces[5]
-			editor_id = revision_pieces[6]
 			
-			yield article_id, editor_id
+			try:
+				article_id = revision_pieces[1]
+				#revision_id = revision_pieces[2]
+				#articale_title = revision_pieces[3]
+				#timestamp = revision_pieces[4]
+				#editor = revision_pieces[5]
+				editor_id = revision_pieces[6]
+				
+				yield article_id, editor_id
+
+			except IndexError as e:
+				print(e)
+
 
 	def reducer(self, article_id, values):
 		edit_count = 0
