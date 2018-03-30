@@ -22,7 +22,7 @@ class MRInitialProcess(MRJob):
 				yield article_id, editor_id
 
 			except IndexError as e:
-				print(e)
+				pass
 
 
 	def reducer(self, article_id, values):
