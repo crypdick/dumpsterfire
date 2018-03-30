@@ -5,6 +5,8 @@
 #"481609"	[318, 113]
 # above is what the file looks like 
 import re
+import matplotlib.pyplot as plt
+import numpy as np
 
 editors = 0
 edits = 0
@@ -22,4 +24,8 @@ with open("results/job1_output.txt") as f:
 	average_edits = edits/count
 	print("Average number of unique editors is " + str(average_editors))
 	print("Average number of edits is " + str(average_edits)) 
+	plt.hist(editors, normed=True, bins=30)
+	plt.ylabel('Number of unique editors');
+	plt.savefig('editor_histogram.png')
+
 	
