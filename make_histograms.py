@@ -13,9 +13,6 @@ with open("results/job1_output.txt") as f:
         clean_pieces = [re.sub('\W+', '', string) for string in pieces]
         editors.append( float(clean_pieces[2]))
         edits.append( float(clean_pieces[1]))
-    plt.hist(editors, range=[1, 100], bins=150)
-    plt.ylabel('Number of unique editors')
-    plt.savefig('editor_histogram.png')
     
     plt.hist(edits, range = [1,100], bins = 150)
     plt.ylabel('Number of edits')
