@@ -32,7 +32,7 @@ editors_bins = np.arange(np.floor(editors.min()), np.ceil(editors.max()))
 edit_probabilities, _ = np.histogram(edits, bins=edits_bins, density=True)
 editor_probabilities, _ = np.histogram(editors, bins=editors_bins, density=True)
 
-fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, sharex=True, figsize=(8,4))
+fig, ((ax1, ax3), (ax2, ax4)) = plt.subplots(nrows=2, ncols=2, sharex=True, figsize=(8,4))
 edits_widths = edits_bins[:-1] - edits_bins[1:]
 ax1.bar(edits_bins[1:], edit_probabilities, width=edits_widths)
 ax2.bar(edits_bins[1:], edit_probabilities.cumsum(), width=edits_widths)
@@ -41,9 +41,9 @@ editor_widths = editors_bins[:-1] - editors_bins[1:]
 ax3.bar(editors_bins[1:], editor_probabilities, width=editor_widths)
 ax4.bar(editors_bins[1:], editor_probabilities.cumsum(), width=editor_widths)
 
-ax1.set_ylabel('Edits')
-ax3.set_ylabel('Editors')
-ax3.set_xlabel('PDFs')
-ax4.set_xlabel('CDFs')
+ax1.set_ylabel('PDFs')
+ax3.set_ylabel('CDFs')
+ax3.set_xlabel('Edits')
+ax4.set_xlabel('Editors')
 fig.tight_layout()
 plt.savefig("edits_editors_pdfcdf.png")
