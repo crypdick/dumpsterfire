@@ -14,7 +14,7 @@ with open("results/job1_output.txt") as f:
         editors.append( float(clean_pieces[2]))
         edits.append( float(clean_pieces[1]))
 
-# TODO mask out vals with only 1 so that we can have meaningful prob densities
+# TODO mask out vals with <10 total edits so that we can have meaningful prob densities
 
 # plt.hist(edits, range = [1,100], bins = 150)
 # plt.ylabel('Number of edits')
