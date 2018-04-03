@@ -13,7 +13,7 @@ class MRPotentialFires(MRJob):
 			article_id = revision_pieces[1]
 			if article_id in self.filtered_articles:
 		    	#revision_id = revision_pieces[2]
-                date_time = datetime.strptime(revision_pieces[4])
+                date_time = datetime.strptime(revision_pieces[4]).date()
 		    	editor = revision_pieces[6]
 		    	yield(date_time, (editor, 1))
 
