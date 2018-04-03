@@ -33,7 +33,10 @@ class MRPotentialFires(MRJob):
 		yield(datetime_article, edit_counts)
 
     def reducer_final(self, datetime_article, edit_counts):
-        
+        filtered_dict = {k: v for k, v in edit_counts.items() if v > 4}
+        if len(filtered_dict) >= 2:
+            date_time, article_id = datetime_article
+            yield (datetime, article_id)
 
 
 if __name__ == "__main__":
