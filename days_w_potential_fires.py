@@ -4,6 +4,7 @@ import datetime import datetime
 class MRPotentialFires(MRJob):
 
 	def mapper_init(self):
+        """we made a list of articles that are dumpsters"""
         with open("results/dumpsters_list.txt", "r") as f:
             self.filtered_articles = set(f.readlines())
 
@@ -13,9 +14,10 @@ class MRPotentialFires(MRJob):
 			article_id = revision_pieces[1]
 			if article_id in self.filtered_articles:
 		    	#revision_id = revision_pieces[2]
+                # .date() throws out the hr-min-sec info
                 date_time = datetime.strptime(revision_pieces[4]).date()
-		    	editor = revision_pieces[6]
-		    	yield((date_time, article_id), (editor, 1))
+		    	editor_id = revision_pieces[6]
+		    	yield((date_time, article_id), (editor_id, 1))
 
     def combiner(self, date_time_article, values):
         edit_counts = {}
