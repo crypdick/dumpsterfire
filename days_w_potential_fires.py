@@ -33,7 +33,9 @@ class MRPotentialFires(MRJob):
 		yield(datetime_article, edit_counts)
 
     def reducer_final(self, datetime_article, edit_counts):
-        filtered_dict = {k: v for k, v in edit_counts.items() if v > 4}
+        # filter for editors who made at least 4 edits in a day in this article
+        filtered_dict = {k: v for k, v in edit_counts.items() if v >= 4}
+        # if at least 2 editors made at least 4 edits
         if len(filtered_dict) >= 2:
             date_time, article_id = datetime_article
             yield (datetime, article_id)
