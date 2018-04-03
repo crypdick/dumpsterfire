@@ -15,25 +15,26 @@ class MRPotentialFires(MRJob):
 		    	#revision_id = revision_pieces[2]
                 date_time = datetime.strptime(revision_pieces[4]).date()
 		    	editor = revision_pieces[6]
-		    	yield(date_time, (editor, 1))
+		    	yield((date_time, article_id), (editor, 1))
 
-    def combiner(self, date_time, values):
+    def combiner(self, date_time_article, values):
         edit_counts = {}
         for (editor_id, edit_count) in values:
             edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
-        for id, count in edit_counts.items():
-            yield (date_time, id, count)
+        for editor_id, count in edit_counts.items():
+            yield (date_time_article, (editor_id, count))
 
-	def reducer(self, date, values):
+	def reducer(self, datetime_article, values):
         edit_counts = {}
         for (editor_id, edit_count) in values:
             # set default val to zero if key doesn't exist yet
             # this method has good time complexity
             edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
-		yield(date, edit_counts)
+		yield(datetime_article, edit_counts)
 
-    def reducer_final(self, date, edit_counts):
-        pass
+    def reducer_final(self, datetime_article, edit_counts):
+        
+
 
 if __name__ == "__main__":
 	MRPotentialFires.run()
