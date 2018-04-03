@@ -17,12 +17,16 @@ class MRPotentialFires(MRJob):
 		    	editor = revision_pieces[6]
 		    	yield(date_time, (editor, 1))
 
-	def reducer(self, article, metadata):
+	def reducer(self, date, values):
+        edit_counts = {}
+        for (editor_id, edit_count) in values:
+            # set default val to zero if key doesn't exist yet
+            # this method has good time complexity
+            edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
+		yield(date, edit_counts)
 
-		edit_count = 0
-		for metadatum in metadata:
-			edit_count += 1
-		yield(article, edit_count)
+    def reducer_final(self, date, edit_counts):
+        pass
 
 if __name__ == "__main__":
 	MRPotentialFires.run()
