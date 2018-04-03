@@ -1,11 +1,12 @@
 from mrjob.job import MRJob
-import datetime import datetime
+from mrjob.step import MRStep
+from datetime import datetime
 
 class MRPotentialFires(MRJob):
 
     def mapper_init(self):
         """we made a list of articles that are dumpsters"""
-        with open("results/dumpsters_list.txt", "r") as f:
+        with open("/home/richard2/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt", "r") as f:
             self.filtered_articles = set(f.readlines())
 
     def mapper(self, _, line):
@@ -34,15 +35,25 @@ class MRPotentialFires(MRJob):
             edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
         yield (datetime_article, edit_counts)
 
-    def reducer_final(self, datetime_article, edit_counts):
+    def reducer_select_w_4more_edits(self, datetime_article, edit_counts):
         # filter for editors who made at least 4 edits in a day in this article
-        filtered_dict = {k: v for k, v in edit_counts.items() if v >= 4}
+        filtered_dict = dict((k, v) for (k, v) in edit_counts.items() if v >= 4)
+        #filtered_dict = {k: v for k, v in edit_counts.items() if v >= 4}
         # if at least 2 editors made at least 4 edits
         if len(filtered_dict) >= 2:
             date_time, article_id = datetime_article
             # final output is a list of article_ids, with each one having a list
             # of dates which we want to grab all revision comments
             yield (article_id, datetime)
+    
 
+    def steps(self):
+        return [
+            MRStep(mapper_init=self.mapper_init,
+                   mapper=self.mapper,
+                   combiner=self.combiner,
+                   reducer=self.reducer),
+            MRStep(reducer=self.reducer_select_w_4more_edits)
+        ]
 if __name__ == "__main__":
     MRPotentialFires.run()
