@@ -17,6 +17,13 @@ class MRPotentialFires(MRJob):
 		    	editor = revision_pieces[6]
 		    	yield(date_time, (editor, 1))
 
+    def combiner(self, date_time, values):
+        edit_counts = {}
+        for (editor_id, edit_count) in values:
+            edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
+        for id, count in edit_counts.items():
+            yield (date_time, id, count)
+
 	def reducer(self, date, values):
         edit_counts = {}
         for (editor_id, edit_count) in values:
