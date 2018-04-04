@@ -10,7 +10,9 @@ class MRPotentialFires(MRJob):
 
     def mapper_init(self):
         """we made a list of articles that are dumpsters"""
-        with open("/home/richard2/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt", "r") as f:
+        with open(
+                "/home/richard2/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt",
+                "r") as f:
             self.filtered_articles = set(str(f.readlines()))
 
     def mapper(self, _, line):
@@ -52,7 +54,7 @@ class MRPotentialFires(MRJob):
         # filter for editors who made at least 4 edits in a day in this article
         candidates  = []
         for editor_id, counts in edit_counts:
-            if counts>=4:
+            if counts >= 4:
                 candidates.append(editor_id)
         # at least 2 editors made at least 4 edits apiece
         if len(candidates) >= 2:
@@ -70,5 +72,7 @@ class MRPotentialFires(MRJob):
                    reducer=self.reducer),
             MRStep(reducer=self.reducer_select_w_4more_edits)
         ]
+
+
 if __name__ == "__main__":
     MRPotentialFires.run()
