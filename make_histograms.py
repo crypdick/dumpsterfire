@@ -1,5 +1,5 @@
 import re
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 
 article_ids = []
@@ -99,6 +99,6 @@ def find_critical_value(arr, bins, percentage=0.05):
 
 # based on the graphs, the long tails begin at about 200 edits and 100 editors
 # we will filter articles based on that.
-dumpsters = np.array(article_ids, dtype=int)[(edits_orig < 200) & (editors_orig < 100)]
+dumpsters = np.array(article_ids, dtype=int)[(edits_orig < 200) & (editors_orig < 100) & (edits_orig > 10) & (editors_orig>2)]
 #print("dumpsters", dumpsters)
 np.savetxt('dumpsters_list.txt', dumpsters, fmt='%1s')  # string min len 1

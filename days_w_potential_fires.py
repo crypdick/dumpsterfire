@@ -4,7 +4,6 @@ from datetime import datetime
 import dateutil.parser
 import sys
 
-
 class MRPotentialFires(MRJob):
 
     def mapper_init(self):
@@ -15,6 +14,7 @@ class MRPotentialFires(MRJob):
             self.filtered_articles = set(str(f.readlines()))
 
     def mapper(self, _, line):
+        sys.stderr.write("poop")
         if "REVISION" in line[:8]:  # don't need to search whole line
             revision_pieces = line.split()
             article_id = revision_pieces[1]
@@ -41,6 +41,7 @@ class MRPotentialFires(MRJob):
         #    my_d[str(datetime_article)] = v
         # yield (str(datetime_article), str(my_d))
         edit_counts = {}
+        print("reducer started for ", datetime_article)
         for (editor_id, edit_count) in values:
             # set default val to zero if key doesn't exist yet
             # this method has good time complexity
