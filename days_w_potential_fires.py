@@ -1,6 +1,7 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 from datetime import datetime
+import sys
 
 class MRPotentialFires(MRJob):
 
@@ -10,10 +11,12 @@ class MRPotentialFires(MRJob):
             self.filtered_articles = set(f.readlines())
 
     def mapper(self, _, line):
+        sys.stderr.write("poop")
         if "REVISION" in line[:8]:  # don't need to search whole line
             revision_pieces = line.split()
             article_id = revision_pieces[1]
             if article_id in self.filtered_articles:
+                print("article id match: {}".format(article_id), flush=True)
                 #revision_id = revision_pieces[2]
                 # .date() throws out the hr-min-sec info
                 date_time = datetime.strptime(revision_pieces[4]).date()
@@ -29,6 +32,7 @@ class MRPotentialFires(MRJob):
 
     def reducer(self, datetime_article, values):
         edit_counts = {}
+        print("reducer started for ", datetime_article)
         for (editor_id, edit_count) in values:
             # set default val to zero if key doesn't exist yet
             # this method has good time complexity
