@@ -14,11 +14,10 @@ class MRPotentialFires(MRJob):
                 "/home/richard2/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt",
                 "r") as f:
             self.filtered_articles = set(str(f.readlines()))
-            sys.stderr.write("hello")
 
     def mapper(self, _, line):
         """note: if we wanted to get better results, I think we shouldn't use midnight as the delimiter between days
-        my guess is that the minimum of edits is sometime around 5am GMT. 
+        my guess is that the minimum of edits is sometime around 5am GMT.
         to figure this out, for each revision we should just output what hr of the day it was made and plot a histogram
         """
         if "REVISION" in line[:8]:  # don't need to search whole line
@@ -48,7 +47,7 @@ class MRPotentialFires(MRJob):
             # set default val to zero if key doesn't exist yet
             # this method has good time complexity
             edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
-        for editor_id, counts in edit_counts.items(): 
+        for editor_id, counts in edit_counts.items():
             yield (date_article, (editor_id, counts))
 
     def reducer_select_w_4more_edits(self, date_article, edit_counts):
@@ -63,7 +62,7 @@ class MRPotentialFires(MRJob):
             # of dates which we want to grab all revision comments
             # using space as key to make it easier to strip out crud later
             yield (" ", date_article)
-    
+
 
     def steps(self):
         return [
@@ -73,5 +72,7 @@ class MRPotentialFires(MRJob):
                    reducer=self.reducer),
             MRStep(reducer=self.reducer_select_w_4more_edits)
         ]
+
+
 if __name__ == "__main__":
     MRPotentialFires.run()
