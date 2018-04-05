@@ -10,10 +10,8 @@ class MRPotentialFires(MRJob):
 
     def mapper_init(self):
         """we made a list of articles that are dumpsters"""
-        with open(
-                "/home/richard2/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt",
-                "r") as f:
-            self.filtered_articles = set(str(f.readlines()))
+        fname = "/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt",
+        self.filtered_articles = set(line.strip() for line in open('filename.txt'))
 
     def mapper(self, _, line):
         """note: if we wanted to get better results, I think we shouldn't use midnight as the delimiter between days
