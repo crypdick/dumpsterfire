@@ -22,8 +22,7 @@ class MRPotentialFires(MRJob):
             revision_pieces = line.split()
             article_id = revision_pieces[1]
             # prefilter for articles we've whitelisted
-            #if article_id in self.filtered_articles:
-            if True:
+            if article_id in self.filtered_articles:
                 # #revision_id = revision_pieces[2]
                 # # .date() throws out the hr-min-sec info
                 # # can't use date as key so need to stringify first
