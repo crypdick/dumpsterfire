@@ -56,7 +56,7 @@ class MRPotentialFires(MRJob):
             if counts >= 1: # FIXME make 4 later
                 candidates.append(editor_id)
         # if at least 2 editors made at least 4 edits apiece
-        if len(candidates) >= 2:
+        if len(candidates) >= 1:
             # final output is a list of article_ids, with each one having a list
             # of dates which we want to grab all revision comments
             # using space as key to make it easier to strip out crud later
