@@ -12,6 +12,9 @@ class MRPotentialFires(MRJob):
         fname = "/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt"
         with open(fname, "r") as f:
             self.filtered_articles = set(str(line.strip()) for line in f)
+        # TODO FIXME remove after done with testing
+        self.filtered_articles.add("6")
+        self.filtered_articles.add("8")
 
     def mapper(self, _, line):
         """note: if we wanted to get better results, I think we shouldn't use midnight as the delimiter between days
@@ -29,6 +32,8 @@ class MRPotentialFires(MRJob):
                 date = str(dateutil.parser.parse(revision_pieces[4]).date())
                 editor_id = revision_pieces[6]
                 date_article = str((date, article_id))
+                yield ("THIS IS A TEST", ("ROGERYOLO420", 1))
+                yield ("THIS IS A TEST", ("NOAH_TEH_GANGSTAxoxo6969", 1))
                 yield (date_article, (editor_id, 1))
     #
     # def combiner(self, date_article, values):
