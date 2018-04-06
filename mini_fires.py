@@ -35,14 +35,14 @@ class MRPotentialFires(MRJob):
                 yield ("THIS IS A TEST", ("ROGERYOLO420", 1))
                 yield ("THIS IS A TEST", ("NOAH_TEH_GANGSTAxoxo6969", 1))
                 yield (date_article, (editor_id, 1))
-    #
-    # def combiner(self, date_article, values):
-    #     edit_counts = {}
-    #     for (editor_id, edit_count) in values:
-    #         edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
-    #     # MRjob can't pass full dictionaries (not serializable) so we gotta extract items
-    #     for editor_id, count in edit_counts.items():
-    #         yield (date_article, (editor_id, count))
+
+    def combiner(self, date_article, values):
+        edit_counts = {}
+        for (editor_id, edit_count) in values:
+            edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
+        # MRjob can't pass full dictionaries (not serializable) so we gotta extract items
+        for editor_id, count in edit_counts.items():
+            yield (date_article, (editor_id, count))
 
     def reducer(self, date_article, values):
         for v in values:
