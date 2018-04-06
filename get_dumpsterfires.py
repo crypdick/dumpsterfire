@@ -34,7 +34,7 @@ class MRGrabDumpsterFires(MRJob):
         to figure this out, for each revision we should just output what hr of the day it was made and plot a histogram
         """
         if "REVISION" in line[:8]:  # don't need to search whole line
-            revision_pieces = line.split()
+            revision_pieces = line.split("")
             article_id = revision_pieces[1]
             # prefilter for articles we've whitelisted
             if article_id in self.filtered_datearticles:
