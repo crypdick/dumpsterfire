@@ -45,17 +45,17 @@ class MRPotentialFires(MRJob):
             yield (date_article, (editor_id, count))
 
     def reducer(self, date_article, values):
-        for v in values:
-            yield (date_article, v)
-        # edit_counts = {}
-        # for (editor_id, edit_count) in values:
-        #     # set default val to zero if key doesn't exist yet
-        #     # this method has good time complexity
-        #     edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
-        # for editor_id, counts in edit_counts.items():
-        #     if counts >= 1: # FIXME make 4 later
-        #         yield (date_article, (editor_id, counts))
-    #
+        # for v in values:
+        #     yield (date_article, v)
+        edit_counts = {}
+        for (editor_id, edit_count) in values:
+            # set default val to zero if key doesn't exist yet
+            # this method has good time complexity
+            edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
+        for editor_id, counts in edit_counts.items():
+            if counts >= 1: # FIXME make 4 later
+                yield (date_article, (editor_id, counts))
+
     # def reducer_select_w_4more_edits(self, date_article, edit_counts):
     #     # filter for editors who made at least 4 edits in a day in this article
     #     candidates = []
