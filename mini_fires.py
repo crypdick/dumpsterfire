@@ -53,7 +53,7 @@ class MRPotentialFires(MRJob):
             # this method has good time complexity
             edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
         for editor_id, counts in edit_counts.items():
-            if counts >= 1: # FIXME make 4 later
+            if counts >= 4: # FIXME make 4 later
                 yield (date_article, (editor_id, counts))
 
     # def reducer_select_w_4more_edits(self, date_article, edit_counts):
