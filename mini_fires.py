@@ -53,31 +53,30 @@ class MRPotentialFires(MRJob):
             # this method has good time complexity
             edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
         for editor_id, counts in edit_counts.items():
-            if counts >= 4: # FIXME make 4 later
+            if counts >= 4:
                 yield (date_article, (editor_id, counts))
 
-    # def reducer_select_w_4more_edits(self, date_article, edit_counts):
-    #     # filter for editors who made at least 4 edits in a day in this article
-    #     candidates = []
-    #     for editor_id, counts in edit_counts:
-    #         if counts >= 1: # FIXME make 4 later
-    #             candidates.append(editor_id)
-    #     # if at least 2 editors made at least 4 edits apiece
-    #     if len(candidates) >= 1:
-    #         # final output is a list of article_ids, with each one having a list
-    #         # of dates which we want to grab all revision comments
-    #         # using space as key to make it easier to strip out crud later
-    #         yield (" ", date_article)
-    #
-    #
-    # def steps(self):
-    #     return [
-    #         MRStep(mapper_init=self.mapper_init,
-    #                mapper=self.mapper,
-    #                combiner=self.combiner,
-    #                reducer=self.reducer),
-    #         MRStep(reducer=self.reducer_select_w_4more_edits)
-    #     ]
+    def reducer_select_w_4more_edits(self, date_article, edit_counts):
+        # filter for editors who made at least 4 edits in a day in this article
+        candidates = []
+        for editor_id, counts in edit_counts:
+            candidates.append(editor_id)
+        # if at least 2 editors made at least 4 edits apiece
+        if len(candidates) >= 2:
+            # final output is a list of article_ids, with each one having a list
+            # of dates which we want to grab all revision comments
+            # using space as key to make it easier to strip out crud later
+            yield (" ", date_article)
+
+
+    def steps(self):
+        return [
+            MRStep(mapper_init=self.mapper_init,
+                   mapper=self.mapper,
+                   combiner=self.combiner,
+                   reducer=self.reducer),
+            MRStep(reducer=self.reducer_select_w_4more_edits)
+        ]
 
 
 if __name__ == "__main__":
