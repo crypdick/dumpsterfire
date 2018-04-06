@@ -22,10 +22,11 @@ class MRPotentialFires(MRJob):
             revision_pieces = line.split()
             article_id = revision_pieces[1]
             # prefilter for articles we've whitelisted
-            if article_id in self.filtered_articles:
-                #revision_id = revision_pieces[2]
-                # .date() throws out the hr-min-sec info
-                # can't use date as key so need to stringify first
+            #if article_id in self.filtered_articles:
+            if True:
+                # #revision_id = revision_pieces[2]
+                # # .date() throws out the hr-min-sec info
+                # # can't use date as key so need to stringify first
                 date = str(dateutil.parser.parse(revision_pieces[4]).date())
                 editor_id = revision_pieces[6]
                 date_article = str((date, article_id))
@@ -40,37 +41,39 @@ class MRPotentialFires(MRJob):
             yield (date_article, (editor_id, count))
 
     def reducer(self, date_article, values):
-        edit_counts = {}
-        for (editor_id, edit_count) in values:
-            # set default val to zero if key doesn't exist yet
-            # this method has good time complexity
-            edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
-        for editor_id, counts in edit_counts.items():
-            if counts >= 1: # FIXME make 4 later
-                yield (date_article, (editor_id, counts))
-
-    def reducer_select_w_4more_edits(self, date_article, edit_counts):
-        # filter for editors who made at least 4 edits in a day in this article
-        candidates = []
-        for editor_id, counts in edit_counts:
-            if counts >= 1: # FIXME make 4 later
-                candidates.append(editor_id)
-        # if at least 2 editors made at least 4 edits apiece
-        if len(candidates) >= 1:
-            # final output is a list of article_ids, with each one having a list
-            # of dates which we want to grab all revision comments
-            # using space as key to make it easier to strip out crud later
-            yield (" ", date_article)
-
-
-    def steps(self):
-        return [
-            MRStep(mapper_init=self.mapper_init,
-                   mapper=self.mapper,
-                   combiner=self.combiner,
-                   reducer=self.reducer),
-            MRStep(reducer=self.reducer_select_w_4more_edits)
-        ]
+        for v in values:
+            yield (date_article, v)
+        # edit_counts = {}
+        # for (editor_id, edit_count) in values:
+        #     # set default val to zero if key doesn't exist yet
+        #     # this method has good time complexity
+        #     edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
+        # for editor_id, counts in edit_counts.items():
+        #     if counts >= 1: # FIXME make 4 later
+        #         yield (date_article, (editor_id, counts))
+    #
+    # def reducer_select_w_4more_edits(self, date_article, edit_counts):
+    #     # filter for editors who made at least 4 edits in a day in this article
+    #     candidates = []
+    #     for editor_id, counts in edit_counts:
+    #         if counts >= 1: # FIXME make 4 later
+    #             candidates.append(editor_id)
+    #     # if at least 2 editors made at least 4 edits apiece
+    #     if len(candidates) >= 1:
+    #         # final output is a list of article_ids, with each one having a list
+    #         # of dates which we want to grab all revision comments
+    #         # using space as key to make it easier to strip out crud later
+    #         yield (" ", date_article)
+    #
+    #
+    # def steps(self):
+    #     return [
+    #         MRStep(mapper_init=self.mapper_init,
+    #                mapper=self.mapper,
+    #                combiner=self.combiner,
+    #                reducer=self.reducer),
+    #         MRStep(reducer=self.reducer_select_w_4more_edits)
+    #     ]
 
 
 if __name__ == "__main__":
