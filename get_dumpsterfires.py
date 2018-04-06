@@ -33,9 +33,21 @@ class MRGrabDumpsterFires(MRJob):
         my guess is that the minimum of edits is sometime around 5am GMT.
         to figure this out, for each revision we should just output what hr of the day it was made and plot a histogram
         """
-        # revision_pieces = line.split("")
-        # yield (revision_pieces[0], str(revision_pieces[1:]))
-        yield (line[0], str(line[1:]))
+        revision_pieces = line.split("")
+        """
+        index 0
+        "REVISION 12 1906487 Anarchism 2003-12-08T20:18:19Z Sam_Francis 6103"
+        index 10
+        "COMMENT Anyone who opposes government on principle is considered an anarchist."	""
+        """
+        # remove the leading 8 chars and strip decorations
+        revision_info = revision_pieces[0][8:].replace('"', '').strip().split()
+        # TODO get dates
+        # remove leading 7 chars
+        comments = revision_pieces[10][7:]
+
+        yield (revision_info, comments)#str(revision_pieces[8]))
+        # yield (line[0], str(line[1:]))
 
     def reducer(self, key, values):
         for v in values:
