@@ -11,16 +11,16 @@ class MRInitialProcess(MRJob):
 				comment = line.lower()
 				comment = comment.split(' ', 1)[1]
 				#everything after COMMENT
-				if (findWholeWord('rant')(comment)) is not None:
-					yield 'rant', comment
+				# if (findWholeWord('rant')(comment)) is not None:
+				# 	yield 'rant', comment
 				if (findWholeWord('canon')(comment)) is not None:
 					yield 'canon', comment
-				if (findWholeWord('opinion')(comment)) is not None:
-					yield 'opinion', comment
-				if (findWholeWord('damn')(comment)) is not None:
-					yield 'damn', comment
-				if (findWholeWord('npov')(comment)) is not None:
-					yield 'npov', comment
+				# if (findWholeWord('opinion')(comment)) is not None:
+				# 	yield 'opinion', comment
+				# if (findWholeWord('damn')(comment)) is not None:
+				# 	yield 'damn', comment
+				# if (findWholeWord('npov')(comment)) is not None:
+				# 	yield 'npov', comment
 		except Exception as e:
 			pass
 
