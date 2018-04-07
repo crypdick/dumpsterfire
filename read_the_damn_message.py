@@ -13,7 +13,7 @@ class MRInitialProcess(MRJob):
 				#everything after COMMENT
 				if (findWholeWord('rant')(comment)) is not None:
 					yield 'rant', comment
-				if (findWholeWord('cannon')(comment)) is not None:
+				if (findWholeWord('canon')(comment)) is not None:
 					yield 'canon', comment
 				if (findWholeWord('opinion')(comment)) is not None:
 					yield 'opinion', comment
