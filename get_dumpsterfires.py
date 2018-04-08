@@ -8,7 +8,7 @@ class MRGrabDumpsterFires(MRJob):
 
     def mapper_init(self):
         """we made a list of articles that are dumpsters"""
-        fname = "/home/shit/bin/ds_shit/distributed/dumpsterfire/results/toy_dumpsterfire.out"
+        fname = "/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsterfire_datearticles.out.clean"
         with open(fname, "r") as f:
             """
             example output from previous job:
@@ -37,11 +37,7 @@ class MRGrabDumpsterFires(MRJob):
                                                "2002-10-28", "2002-10-03"]
 
     def mapper(self, _, line):
-        """note: if we wanted to get better results, I think we shouldn't use midnight as the delimiter between days
-        my guess is that the minimum of edits is sometime around 5am GMT.
-        to figure this out, for each revision we should just output what hr of the day it was made and plot a histogram
-        """
-        revision_pieces = line.split("")
+        revision_pieces = line.split("M0TE")
         """
         index 0
         "REVISION 12 1906487 Anarchism 2003-12-08T20:18:19Z Sam_Francis 6103"
@@ -52,7 +48,7 @@ class MRGrabDumpsterFires(MRJob):
         revision_info = revision_pieces[0][8:].replace('"', '').strip().split()
         article_id, datetimez = revision_info[0], revision_info[3]
         # TODO get more data from revision info?
-        # if article_id in self.articleID_dates:
+        if article_id in self.articleID_dates:
         if True:  # FIXME remove in production
             date = str(dateutil.parser.parse(datetimez).date())
             # if date in self.articleID_dates[article_id]:
