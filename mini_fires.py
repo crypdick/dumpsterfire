@@ -29,20 +29,30 @@ class MRPotentialFires(MRJob):
                 # #revision_id = revision_pieces[2]
                 # # .date() throws out the hr-min-sec info
                 # # can't use date as key so need to stringify first
-                date = str(dateutil.parser.parse(revision_pieces[4]).date())
-                editor_id = revision_pieces[6]
-                date_article = str((date, article_id))
-                yield ("THIS IS A TEST", ("ROGERYOLO420", 1))
-                yield ("THIS IS A TEST", ("NOAH_TEH_GANGSTAxoxo6969", 1))
-                yield (date_article, (editor_id, 1))
+                try:
+                    date = str(dateutil.parser.parse(revision_pieces[4]).date())
+                    editor_id = revision_pieces[6]
+                    # put date first bc article_id is variable length, this way 
+                    # it's easier to string split later
+                    date_article = str((date, article_id))
+                    yield ("THIS IS A TEST", ("ROGERYOLO420", 1))
+                    yield ("THIS IS A TEST", ("NOAH_TEH_GANGSTAxoxo6969", 1))
+                    yield (date_article, (editor_id, 1))
+                except:  # there is strange fuckery in our dataset
+                    with open('failures.log', 'a') as fail_log:
+                        fail_log.write(str(line)+'\n')
+                    pass
 
     def combiner(self, date_article, values):
         edit_counts = {}
         for (editor_id, edit_count) in values:
             edit_counts[editor_id] = edit_counts.get(editor_id, 0) + edit_count
         # MRjob can't pass full dictionaries (not serializable) so we gotta extract items
-        for editor_id, count in edit_counts.items():
-            yield (date_article, (editor_id, count))
+        try:
+            for editor_id, count in edit_counts.items():
+                yield (date_article, (editor_id, count))
+        except:  # TODO figure out what is causing JSONDecodeError
+            pass
 
     def reducer(self, date_article, values):
         # for v in values:

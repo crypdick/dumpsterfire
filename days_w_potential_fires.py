@@ -11,7 +11,7 @@ class MRPotentialFires(MRJob):
     def mapper_init(self):
         """we made a list of articles that are dumpsters"""
         with open(
-                "/home/richard2/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/dumpsters_list.txt",
+                "/home/richard2/Akamai_scratch/team_shane_noah_richard_roger_youngkeun/results/shane_dumpsters.txt",
                 "r") as f:
             self.filtered_articles = set(str(f.readlines()))
 
