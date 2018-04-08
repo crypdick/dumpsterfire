@@ -22,11 +22,12 @@ class MRGrabDumpsterFires(MRJob):
             """
             self.articleID_dates = {}
             for line in f.readlines():
-                date_str, article_id = line.replace('"', '') \
+                sentence =  line.replace('"', '') \
                     .replace("'", "") \
                     .replace('(', '') \
-                    .replace(')', '') \
-                    .split(',')
+                    .replace(')', '')
+                sentence = ''.join(sentence.split()) # removes every kind of whitespace
+                date_str, article_id = sentence.split(',')
                 if article_id in self.articleID_dates:
                     self.articleID_dates[article_id].append(date_str)
                 else:
@@ -34,9 +35,9 @@ class MRGrabDumpsterFires(MRJob):
 
             # FIXME delete later
             # manual injection of Anarchism articles for testing purposes
-            self.articleID_dates["12"] = ["2002-10-02", "2002-09-09",
-                                          "2002-12-11",
-                                          "2002-10-28", "2002-10-03"]
+            #self.articleID_dates["12"] = ["2002-10-02", "2002-09-09",
+            #                              "2002-12-11",
+            #                              "2002-10-28", "2002-10-03"]
 
     def mapper(self, _, line):
         revision_pieces = line.split("")
