@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Fantastic Trashfires</title>
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-markdown>
+                    <textarea data-template>
+                    ### Fantastic Trashfires
+                    #### (And Where to Find Them)
+
+                    Shane Caldwell, Roger Filmyer, Noah Johnson, Richard Decal, and Young Keun Oliveira
+                    </textarea>
+                </section>
+                <section data-markdown>
+                        <textarea data-template>
+                            # What's a trashfire?
+                            - We need to define our terms:
+                        </textarea>
+                    </section>
+    
+                <section data-markdown>
+                    <textarea data-template>
+
+                       ![](img/definition_trashfire.png)                         
+
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ### Wikipedia keeps it's own record of these
+
+                        ![](img/missed_the_memo.png)
+
+                        - *We missed the memo on this one. 
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ### Personal Favorite
+
+                        [Roger does the American chopper meme thing here, using the GT quotes]
+                        INCLUDING TJ, READ THE DAMN MESSAGE. It is all FACTS. What you say is opinion. I have provided nothign but facts, and have proven GT is non canon. Please stop editing in bad faith.
+
+                    </textarea>
+                </section>
+                <section data-markdown>
+                        <textarea data-template>
+                            ### Two Strategies
+                            - Method one: Finding people having back and forths on obscure articles.
+                            - Method two: Looking for 5 Cursed Words
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### 5 Cursed Words 
+                                - What are "cursed words" on Wikipedia?
+                                - We (post-hoc) define these as words we noticed in many trash-fires as being associated with an end to civil discussion.
+                                - Many comments around this are also toxic.
+                            </textarea>
+                        </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Rant
+
+                                - Calling things rants is one of the more insulting ways to change a Wiki.
+                                - Almost always elicits an indignant response.
+                                ```
+                                Comment 1: 2002-10-02, Revert to pre- rant
+                                Comment 2: 2002-10-02, Rant? Stop changing the document when you havent read it
+                                ```
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Canon 
+                                - Only nerds argue about canon.
+                                - That's just a fact. 
+
+                                ```
+                                TJ, READ THE DAMN MESSAGE. It is all FACTS. What you say is opinion. I have provided nothign but facts, and have proven GT is non canon. Please stop editing in bad faith.
+                                ```
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Opinion
+                                - Wikipedia is a bad place for opinions. 
+                                ```
+                                TJ, READ THE DAMN MESSAGE. It is all FACTS. What you say is opinion.
+                                ```
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                            ### Damn 
+                            - Essentially a swear word on Wikipedia.
+                            - Almost always indicates nonsense
+                        ```
+                        revert spam -- all this damn anon account done is spam the same links over and over everywhere
+                        ```
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### NPOV
+                                - Similar to rant this is specific slang to Wikipedia. Refers to making things a "neutral point of view"
+                                - Implies the previous commenter failed.
+                            ```
+                            Commenter 1: NPOV
+                            Commenter 2: R u actually going to read it?
+                            Commenter 1: NPOV version, again"
+                            ```
+                            </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Step 1: Map Reduce
+                                - Cast the comments to lowercase, see if the word is in there.
+                                -If so, it's cursed.
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Sentiment Analysis
+                                - Use Watson to determine how angry a comment is 
+                                - Rates anger, if detected from 0 to 100.
+                                - 0.0 to .50, not confident
+                                - 0.5 and up, fairly confident
+                                - 0.75 and up, extremely confident
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Subset of each cursed word
+                                - Find percentage of angry words
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### What was our subset of "potentially cursed"?
+                                - Total revision count: 116,590,856
+                                - Total number of cursed words, potentially: 213,354
+                                - So we're left with 0.18% of the revisions.
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Of those, how many were angry?
+
+                                ![](img/angerrry.gif)
+
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Analysis on a budget
+                                - Analyzing the sentiment in all 213,354 comments would've cost... 
+                                ![](img/not_happenin.png)
+                                - Thanks IBM
+                             </textarea>
+                    </section>
+                    <section data-markdown>
+                            <textarea data-template>
+                                ### Takeaways
+                                - Big Data? Pretty big.
+                             </textarea>
+                    </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
+</html>

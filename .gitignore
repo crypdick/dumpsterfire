@@ -1,3 +1,4 @@
+node_modules/*
 *.png
 .idea/*
 # Created by .ignore support plugin (hsz.mobi)
