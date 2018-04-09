@@ -48,7 +48,7 @@
                 </section>
                 <section data-markdown>
                     <textarea data-template>
-                        ### Wikipedia keeps it's own record of these
+                        ### Wikipedia keeps its own record of these
 
                         ![](img/missed_the_memo.png)
 
@@ -94,36 +94,37 @@
                     <section data-markdown>
                             <textarea data-template>
                                 ### Canon 
+
                                 - Only nerds argue about canon.
                                 - That's just a fact. 
 
-                                ```
-                                TJ, READ THE DAMN MESSAGE. It is all FACTS. What you say is opinion. I have provided nothign but facts, and have proven GT is non canon. Please stop editing in bad faith.
-                                ```
+                                > TJ, READ THE DAMN MESSAGE. It is all FACTS. What you say is opinion. I have provided nothign but facts, and have proven GT is non canon. Please stop editing in bad faith.
+                                
                              </textarea>
                     </section>
                     <section data-markdown>
                             <textarea data-template>
                                 ### Opinion
-                                - Wikipedia is a bad place for opinions. 
-                                ```
-                                TJ, READ THE DAMN MESSAGE. It is all FACTS. What you say is opinion.
-                                ```
+
+                                - Wikipedia is a bad place for opinions.
+
+                                > TJ, READ THE DAMN MESSAGE. It is all FACTS. What you say is opinion.
                              </textarea>
                     </section>
                     <section data-markdown>
                             <textarea data-template>
                             ### Damn 
+
                             - Essentially a swear word on Wikipedia.
                             - Almost always indicates nonsense
-                        ```
-                        revert spam -- all this damn anon account done is spam the same links over and over everywhere
-                        ```
-                             </textarea>
+                       
+                            > revert spam -- all this damn anon account done is spam the same links over and over everywhere
+                        </textarea>
                     </section>
                     <section data-markdown>
                             <textarea data-template>
                                 ### NPOV
+
                                 - Similar to rant this is specific slang to Wikipedia. Refers to making things a "neutral point of view"
                                 - Implies the previous commenter failed.
                             ```
@@ -136,6 +137,7 @@
                     <section data-markdown>
                             <textarea data-template>
                                 ### Step 1: Map Reduce
+
                                 - Cast the comments to lowercase, see if the word is in there.
                                 -If so, it's cursed.
                              </textarea>
@@ -143,6 +145,7 @@
                     <section data-markdown>
                             <textarea data-template>
                                 ### Sentiment Analysis
+
                                 - Use Watson to determine how angry a comment is 
                                 - Rates anger, if detected from 0 to 100.
                                 - 0.0 to .50, not confident
@@ -153,12 +156,14 @@
                     <section data-markdown>
                             <textarea data-template>
                                 ### Subset of each cursed word
+
                                 - Find percentage of angry words
                              </textarea>
                     </section>
                     <section data-markdown>
                             <textarea data-template>
                                 ### What was our subset of "potentially cursed"?
+
                                 - Total revision count: 116,590,856
                                 - Total number of cursed words, potentially: 213,354
                                 - So we're left with 0.18% of the revisions.
@@ -175,15 +180,67 @@
                     <section data-markdown>
                             <textarea data-template>
                                 ### Analysis on a budget
+
                                 - Analyzing the sentiment in all 213,354 comments would've cost... 
                                 ![](img/not_happenin.png)
                                 - Thanks IBM
                              </textarea>
                     </section>
                     <section data-markdown>
+                        <textarea data-template>
+                            ### Random Sampling
+
+                            - Randomly sample 500 comments from each "cursed word"
+                            - Use these to create a dataset for sentiment analysis
+                         </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        ### Too short for Watson?
+
+                        - After 2,500 samples were placed in
+                        - 1,457 come back with a "tone"
+                        - Some comments are just too short, so nothing comes back. 
+                     </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    ### Examples with "no tone"
+
+                    - Some comments are just too short, so nothing comes back. 
+
+                    ``it is canon!!``
+
+                    - In context, it's clear someone is mad (about star trek) but Watson can't determine that. 
+                 </textarea>
+        </section>
+        <section data-markdown>
+            <textarea data-template>
+                ### Examples with "no tone"
+
+                - Some comments are just too short, so nothing comes back. 
+
+                ``it is canon!!``
+
+                - In context, it's clear someone is mad (about Star Trek) but Watson can't determine that. 
+             </textarea>
+    </section>
+            <section data-markdown>
+                <textarea data-template>
+                    ### Anger?
+
+                    - After all was said and done, only **73** of the comments found with this read as "angry" with confidence, most of those in the damn category. 
+                    - For those keeping score, that's about 5.5% percent of the dataset.
+                    - Not great, but hard to say it's a total failure without finding out what a random sample of 2,500 comments from the dataset read as, tonewise
+                    - (Not enough Watson credits or time for that analysis)
+                 </textarea>
+            </section>
+                    <section data-markdown>
                             <textarea data-template>
                                 ### Takeaways
                                 - Big Data? Pretty big.
+                                - Mapreduce? Sometimes painful.
+                                - Watson? Dialogue is not necessarily a strong suit. 
                              </textarea>
                     </section>
             </div>
