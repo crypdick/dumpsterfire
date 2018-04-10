@@ -69,16 +69,25 @@
                 <section data-markdown>
                         <textarea data-template>
                             ### Two Strategies
-                            - Method one: Finding people having back and forths on obscure articles.
-                            - Method two: Looking for 5 Cursed Words
+                            - Method one: Edit war detection using Doc2Vec
+                            - Method two: Finding people having back and forths on obscure articles.
+                            - Method three: Looking for 5 Cursed Words
+                        </textarea>
+                    </section>
+                <section data-markdown>
+                        <textarea data-template>
+                            ### Two Strategies
+                            - Method one: Editwar detection using Doc2Vec.
+                            - Method two: Sentiment analysis on revision comments of obscure articles.
+                            - Method three: Looking for 5 Cursed Words
                         </textarea>
                     </section>
                     <section data-markdown>
                             <textarea data-template>
-                                ### 5 Cursed Words 
-                                - What are "cursed words" on Wikipedia?
-                                - We (post-hoc) define these as words we noticed in many trash-fires as being associated with an end to civil discussion.
-                                - Many comments around this are also toxic.
+                                ### Edit war detection using Doc2Vec
+                                - Doc2Vec converts a document to a high-dimensional vector which you can do math with.
+                                - Find edit wars with points moving backing and forth. Find anomolies with clustering, big jumps. Characterize article evolution. Find atypical pages with clustering.
+                                - Pretrained  models available. Still, EXTREMELY resource intensive.
                             </textarea>
                         </section>
                     <section data-markdown>
