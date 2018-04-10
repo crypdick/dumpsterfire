@@ -68,9 +68,15 @@
                 </section>
                 <section data-markdown>
                         <textarea data-template>
-                            ### Strategies
-                            1. Edit war detection using Doc2Vec
-                            2. Finding people having back and forths on obscure articles.
+                            ### Finding dumpsters
+                            TODO: include PDFs, CDFs.
+                        </textarea>
+                    </section>
+                <section data-markdown>
+                        <textarea data-template>
+                            ### Strategies for finding fires
+                            1. Finding Edit war detection using Doc2Vec
+                            2. Sentiment analysis on revision comments.
                             3. Looking for 5 Cursed Words
                         </textarea>
                     </section>
@@ -78,10 +84,32 @@
                             <textarea data-template>
                                 ### Edit war detection using Doc2Vec
                                 - Doc2Vec converts a document to a high-dimensional vector which you can do math with.
-                                - Find edit wars with points moving backing and forth. Find anomolies with clustering, big jumps. Characterize article evolution. Find atypical pages with clustering.
-                                - Pretrained  models available. Still, EXTREMELY resource intensive.
+                                - Useful: Find edit wars with points moving backing and forth. Find anomolies with clustering, big jumps. Characterize article evolution. Find atypical pages with clustering.
+                                - Pretrained Wikicorpus models available. Still, EXTREMELY resource intensive.
                             </textarea>
                         </section>
+                <section data-markdown>
+                            <textarea data-template>
+                                ### Sentiment analysis on revision comments
+                                - First, filter dataset for dumpsters.
+                                - Then, find fires by looking at Watson sentiment scores.
+                                - We looked for angry, confidence, and confused. Scores are between 0 and 1, and we looked for scores >0.5.
+                            </textarea>
+                        </section>
+                <section data-markdown>
+                            <textarea data-template>
+                                ### Sentiment Analysis
+
+                                - Use Watson to determine how angry a comment is 
+                                - Rates anger, if detected from 0 to 1.
+                                - 0.0 --> 0.50, not confident. 0.75 --> 1.0, extremely confident.
+                                - We filtered for angrer scores > 0.5.
+                             </textarea>
+                    </section>
+                 <section data-markdown>
+                            <textarea data-template>
+                                ### Cursed Words
+                             </textarea>
                     <section data-markdown>
                             <textarea data-template>
                                 ### Rant
@@ -143,17 +171,6 @@
 
                                 - Cast the comments to lowercase, see if the word is in there.
                                 -If so, it's cursed.
-                             </textarea>
-                    </section>
-                    <section data-markdown>
-                            <textarea data-template>
-                                ### Sentiment Analysis
-
-                                - Use Watson to determine how angry a comment is 
-                                - Rates anger, if detected from 0 to 100.
-                                - 0.0 to .50, not confident
-                                - 0.5 and up, fairly confident
-                                - 0.75 and up, extremely confident
                              </textarea>
                     </section>
                     <section data-markdown>
