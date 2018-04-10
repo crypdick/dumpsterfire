@@ -91,14 +91,13 @@
                                 ### Sentiment analysis on revision comments
                                 - Find days where at >=4 edits from >=2 unique editors in single day.
                                 - Then, get revision comments on those days and compute Watson sentiment scores.
-                                - We looked for angry, confidence, and confused. Scores are between 0 and 1. We looked for comments that scored >0.5.
                             </textarea>
                         </section>
                 <section data-markdown>
                             <textarea data-template>
-                                ### Sentiment Analysis
-                                - Use Watson to determine how angry a comment is 
-                                - Rates anger, if detected from 0 to 1.
+                                ### Sentiment Analysis with Watson
+                                - Rates text as angry, confident, or confused.
+                                - Scores are from 0 to 1.
                                 - 0.0 --> 0.50, not confident. 0.75 --> 1.0, extremely confident.
                                 - We filtered for angrer scores > 0.5.
                              </textarea>
